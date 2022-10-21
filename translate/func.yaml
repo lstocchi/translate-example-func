@@ -1,17 +1,15 @@
 specVersion: 0.25.0
 name: translate
-namespace: default
+namespace: lstest
 runtime: node
-registry: quay.io/lanceball
-image: quay.io/lanceball/translate:latest
-imageDigest: sha256:5fdeadcace2e173688233f8ee7032630a917c8859a8468191ee22b33a8358fb8
+registry: image-registry.openshift-image-registry.svc:5000/lstest
+image: quay.io/lstocchi/translate:latest
+imageDigest: sha256:47cfea0b52e71b9618ee2b870bdb2da55b14a2ce53ea2e4aae867e14f1a6f268
 buildpacks: []
 builder: pack
 volumes: []
 buildEnvs: []
-envs:
-- name: GOOGLE_APPLICATION_CREDENTIALS
-  value: service-account-file.json
+envs: []
 annotations: {}
 options: {}
 labels:

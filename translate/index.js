@@ -1,8 +1,5 @@
 const { CloudEvent, HTTP } = require('cloudevents');
-const { Translate } = require('@google-cloud/translate').v2;
-
-// Use the Google translation API
-const translate = new Translate();
+const translate = require('google-translate-api-x');
 
 // CloudEvent response defaults
 const defaults = {
@@ -13,25 +10,25 @@ const defaults = {
 // Our handler function, invoked with a CloudEvent
 const handle = async (_, event) => {
   if (!event || !event.data) return
-  const data = event.data
+  const data = event.data;
 
-  // Don't translate English tweets, just return the raw text
   if (data.lang === "en") {
     return HTTP.binary(new CloudEvent({
       ...defaults,
       data: data.text
     }));
   } else {
+    const res = await translate(data.text, {to: 'en'});
     return HTTP.binary(new CloudEvent({
-      ...defaults,
-      data: {
-        // Return a CloudEvent with the English translated text
-        ...await translate.translate(data.text, { to: "en", model: "base"}),
-        // Include the original tweet text
-        text: data.text,
-      }
-    }));
+        ...defaults,
+        data: {
+          from: data.text,
+          text: res.text,
+        }
+      }));   
   }
+
+  
 };
 
 module.exports = { handle };

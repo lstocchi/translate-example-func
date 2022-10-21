@@ -10,7 +10,7 @@
   "scripts": {
     "test": "node test/unit.js && node test/integration.js",
     "start": "faas-js-runtime ./index.js",
-    "debug": "nodemon --inspect ./node_modules/faas-js-runtime/bin/cli.js ./index.js"
+    "debug": "nodemon --inspect ./node_modules/faas-js-runtime/bin/cli.js ./index.js localhost 8081"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
@@ -18,8 +18,8 @@
     "tape": "^4.13.0"
   },
   "dependencies": {
-    "@google-cloud/translate": "^7.0.2",
     "cloudevents": "^5.2.0",
-    "faas-js-runtime": "^0.9.0"
+    "faas-js-runtime": "^0.9.0",
+    "google-translate-api-x": "^10.4.2"
   }
 }
